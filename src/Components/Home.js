@@ -1,6 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/fontawesome-free-solid";
+import fontawesome from "@fortawesome/fontawesome";
 
 import Logo from "../logo192.png";
+
+fontawesome.library.add(faChevronRight);
 export const Home = () => {
   return (
     <div className="container">
@@ -32,9 +36,14 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div>
-        <i class="fas fa-fighter-jet"></i>
-        <FontAwesomeIcon icon={["fas", "fa-chevron-right"]} />
+      <div style={{ textAlign: "center", paddingTop: "10px" }}>
+        <button
+          className="btn btn-success"
+          style={{ width: "100px", height: "50px", fontSize: "150%" }}
+        >
+          <FontAwesomeIcon icon="chevron-right" />
+          <FontAwesomeIcon icon="chevron-right" />
+        </button>
       </div>
     </div>
   );
