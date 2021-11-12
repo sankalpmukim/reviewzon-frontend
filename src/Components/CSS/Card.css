@@ -1,0 +1,26 @@
+.selected {
+  border-color: #0d6efd;
+  border-width: medium;
+}
+.card-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  height: min-content;
+}
+
+/* .settings-cog {
+  color: #6c757d;
+  background-color: white;
+} */
+/* .settings-cog:hover {
+  color: white;
+  background-color: #6c757d;
+} */
+.cog-btn {
+  background-color: white;
+}
+/* .cog-btn:hover {
+  background-color: #6c757d;
+} */

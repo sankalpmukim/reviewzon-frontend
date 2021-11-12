@@ -1,0 +1,57 @@
+.square-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons-next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+hr {
+  margin: 1px 0;
+}
+h1 {
+  color: green;
+}
+
+.buttonIn {
+  position: relative;
+  padding: 0.2rem;
+}
+
+.fancy-input {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  outline: none;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.inside-button {
+  position: absolute;
+  top: 0;
+  border-radius: 5px;
+  right: 0px;
+  z-index: 2;
+  border: none;
+  top: 2px;
+  height: 30px;
+  cursor: pointer;
+  color: black;
+  transform: translate(-1rem, 0.38rem);
+}
+
+.modal-hr {
+  margin: 1rem;
+}
+
+.modal-dialog {
+  max-width: 50rem;
+}

@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/fontawesome-free-solid";
-import fontawesome from "@fortawesome/fontawesome";
 import { ReactComponent as PlaceholderImage } from "../static/Placeholder.svg";
+import { useNavigate } from "react-router-dom";
 import Logo from "../logo192.png";
+import "./CSS/Home.css";
 
-fontawesome.library.add(faChevronRight);
 export const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="container">
       <div
@@ -48,9 +49,12 @@ export const Home = () => {
         <button
           className="btn btn-success"
           style={{ width: "100px", height: "50px", fontSize: "150%" }}
+          onClick={() => {
+            navigate("/chooseapproach");
+          }}
         >
-          <FontAwesomeIcon icon="chevron-right" />
-          <FontAwesomeIcon icon="chevron-right" />
+          <FontAwesomeIcon icon={faChevronRight} />
+          <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>
     </div>
