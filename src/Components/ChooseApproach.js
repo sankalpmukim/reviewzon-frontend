@@ -204,7 +204,11 @@ export const ChooseApproach = () => {
                 value={formLink}
                 onChange={(e) => setFormLink(e.currentTarget.value)}
               />
-              <PlusCircle className="inside-button" onClick={addToList} />
+              <PlusCircle
+                className="inside-button"
+                style={{ backgroundColor: "white" }}
+                onClick={addToList}
+              />
             </form>
             <hr className="modal-hr" />
             {lastClickedTraining
