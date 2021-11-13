@@ -40,7 +40,11 @@ export const Card = ({
             name={name}
           />
           <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-            <label className="btn btn-outline-primary" htmlFor={id}>
+            <label
+              className="btn btn-outline-primary"
+              htmlFor={id}
+              style={{ width: "70%" }}
+            >
               Select
             </label>
             {settingsDisabled ? null : (

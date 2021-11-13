@@ -36,13 +36,13 @@ h1 {
 
 .inside-button {
   position: absolute;
-  top: 0;
   border-radius: 5px;
   right: 0px;
   z-index: 2;
   border: none;
-  top: 2px;
-  height: 30px;
+  top: 5px;
+  height: 23px;
+  width: 33px;
   cursor: pointer;
   color: black;
   transform: translate(-1rem, 0.38rem);
