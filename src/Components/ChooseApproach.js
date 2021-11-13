@@ -10,18 +10,7 @@ import { useState } from "react";
 import { Modal } from "./Modal";
 import { PlusCircle } from "react-bootstrap-icons";
 import { UrlDisplay } from "./UrlDisplay";
-
-const validURL = (url) => {
-  const parts = url.split("/");
-  if (
-    parts[0] === "https:" &&
-    parts[2] === "www.amazon.in" &&
-    parts.length > 5
-  ) {
-    return true;
-  }
-  return false;
-};
+import { handlePageChange, validURL } from "./utils";
 
 const extractName = (url) => url.split("/")[3].replaceAll("-", " ");
 
@@ -110,7 +99,7 @@ export const ChooseApproach = () => {
             justifyContent: "center",
           }}
         >
-          <div
+          <button
             className="btn btn-danger"
             onClick={() => {
               navigate("/");
@@ -123,7 +112,7 @@ export const ChooseApproach = () => {
           >
             <FontAwesomeIcon icon={faChevronLeft} />
             <FontAwesomeIcon icon={faChevronLeft} />
-          </div>
+          </button>
         </div>
 
         <h2 className="text-center">This is the ChooseApproach page</h2>
@@ -153,9 +142,9 @@ export const ChooseApproach = () => {
           <button
             className="btn btn-success"
             style={{ width: "100px", height: "50px", fontSize: "150%" }}
-            onClick={() => {
-              navigate("/chooseapproach");
-            }}
+            onClick={() =>
+              handlePageChange(classData, trainingLinks, testingLinks, navigate)
+            }
           >
             <FontAwesomeIcon icon={faChevronRight} />
             <FontAwesomeIcon icon={faChevronRight} />
