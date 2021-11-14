@@ -10,21 +10,34 @@ export const ProgressDisplay = () => {
   const endRef = useRef(null);
   const navigate = useNavigate();
   const [conn, setConn] = useState(null);
+  const [reqData, setReqData] = useState(null);
   useEffect(() => {
-    const url = `ws://localhost:5000`;
+    // const url = `ws://localhost:5000`;
 
-    const connection = new WebSocket(url);
-    setConn(connection);
-    connection.onopen = () => {
-      connection.send(`message from client`);
-    };
-    connection.onerror = (err) => {
-      console.log(`WebSocket Error:${err}`);
-    };
-    connection.onmessage = (e) => {
-      setTextToDisplay((arr) => arr.concat([e.data]));
-    };
-  }, []);
+    // const connection = new WebSocket(url);
+    // setConn(connection);
+    // connection.onopen = () => {
+    //   connection.send(`message from client`);
+    // };
+    // connection.onerror = (err) => {
+    //   console.log(`WebSocket Error:${err}`);
+    // };
+    // connection.onmessage = (e) => {
+    //   setTextToDisplay((arr) => arr.concat([e.data]));
+    // };
+
+    // api request
+    const apiUrl = `http://localhost:8000/`;
+    fetch(apiUrl, {
+      method: "POST",
+      body: JSON.stringify(JSON.parse(searchParams.get("data"))),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((res) => res.json())
+      .then((r) => setReqData(r));
+  }, [searchParams]);
 
   useEffect(() => {
     endRef.current.scrollIntoView({ behavior: "smooth" });
@@ -89,6 +102,7 @@ export const ProgressDisplay = () => {
       </div>
 
       <pre>{JSON.stringify(JSON.parse(searchParams.get("data")), null, 4)}</pre>
+      <pre>{reqData ? JSON.stringify(reqData, null, 4) : null}</pre>
     </div>
   );
 };

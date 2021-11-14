@@ -214,7 +214,7 @@ export const ChooseApproach = () => {
                 ))
               : testingLinks.map((link) => (
                   <UrlDisplay
-                    url={link}
+                    url={extractName(link)}
                     key={link}
                     close={() => {
                       setTestingLinks((links) =>

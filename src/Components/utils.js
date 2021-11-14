@@ -61,8 +61,9 @@ export const handlePageChange = (
       },
     };
   }
-  const urlData = encodeURI(JSON.stringify(sendData));
-  navigate(`/progressdisplay?data=${urlData}`);
+  const url = new URL(`http://127.0.0.1/progressdisplay`);
+  url.searchParams.append(`data`, JSON.stringify(sendData));
+  navigate(url.pathname + url.search);
 };
 
 export const validURL = (url) => {
