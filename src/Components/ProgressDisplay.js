@@ -1,47 +1,27 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/fontawesome-free-solid";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./CSS/ProgressDisplay.css";
+import { Loading } from "./Loading";
+import { TerminalBox } from "./TerminalBox";
 
 export const ProgressDisplay = () => {
   const [searchParams] = useSearchParams();
-  const [textToDisplay, setTextToDisplay] = useState([]);
-  const endRef = useRef(null);
   const navigate = useNavigate();
-  const [conn, setConn] = useState(null);
-  const [reqData, setReqData] = useState(null);
+  const [path, setPath] = useState(null);
   useEffect(() => {
-    // const url = `ws://localhost:5000`;
-
-    // const connection = new WebSocket(url);
-    // setConn(connection);
-    // connection.onopen = () => {
-    //   connection.send(`message from client`);
-    // };
-    // connection.onerror = (err) => {
-    //   console.log(`WebSocket Error:${err}`);
-    // };
-    // connection.onmessage = (e) => {
-    //   setTextToDisplay((arr) => arr.concat([e.data]));
-    // };
-
-    // api request
-    const apiUrl = `http://localhost:8000/`;
-    fetch(apiUrl, {
+    const url = `http://localhost:8000/`;
+    fetch(url, {
       method: "POST",
-      body: JSON.stringify(JSON.parse(searchParams.get("data"))),
+      body: searchParams.get("data"),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
       .then((res) => res.json())
-      .then((r) => setReqData(r));
+      .then((r) => setPath(`livedata/${r["unique_id"]}`));
   }, [searchParams]);
-
-  useEffect(() => {
-    endRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [textToDisplay]);
 
   return (
     <div
@@ -82,27 +62,11 @@ export const ProgressDisplay = () => {
           <h2 className="text-center">This is progress display page</h2>
         </div>
       </div>
-      {conn ? (
-        <button
-          className="btn btn-secondary"
-          onClick={() => {
-            conn.send("counter-increment");
-          }}
-        >
-          +
-        </button>
-      ) : null}
-      <div className="terminal-box">
-        {textToDisplay.map((t, i) => (
-          <div className="terminal-child" key={i}>
-            {t}
-          </div>
-        ))}
-        <div ref={endRef}></div>
-      </div>
+
+      {path ? <TerminalBox path={path} /> : <Loading />}
 
       <pre>{JSON.stringify(JSON.parse(searchParams.get("data")), null, 4)}</pre>
-      <pre>{reqData ? JSON.stringify(reqData, null, 4) : null}</pre>
+      {/* <pre>{reqData ? JSON.stringify(reqData, null, 4) : null}</pre> */}
     </div>
   );
 };
