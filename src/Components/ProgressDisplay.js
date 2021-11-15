@@ -64,9 +64,6 @@ export const ProgressDisplay = () => {
       </div>
 
       {path ? <TerminalBox path={path} /> : <Loading />}
-
-      <pre>{JSON.stringify(JSON.parse(searchParams.get("data")), null, 4)}</pre>
-      {/* <pre>{reqData ? JSON.stringify(reqData, null, 4) : null}</pre> */}
     </div>
   );
 };

@@ -11,12 +11,11 @@
   font-family: monospace;
   font-weight: 500;
   overflow: auto;
-  height: 30rem;
-  width: 40rem;
+  height: 35rem;
+  width: 100%;
   color: rgb(103, 255, 15);
   background-color: black;
-  border-radius: 1rem;
-  font-size: 150%;
+  font-size: 100%;
 }
 
 .terminal-child {
