@@ -1,0 +1,25 @@
+/* style={{
+    overflow: "auto",
+    height: "20rem",
+    width: "20rem",
+    border: "",
+    color: "light-green",
+    backgroundColor: "black",
+  }} */
+
+.terminal-box {
+  font-family: monospace;
+  font-weight: 500;
+  overflow: auto;
+  height: 35rem;
+  width: 100%;
+  color: rgb(103, 255, 15);
+  background-color: black;
+  font-size: 100%;
+}
+
+.terminal-child {
+  padding: 0.1rem;
+  padding-left: 1rem;
+  padding-top: 0;
+}
