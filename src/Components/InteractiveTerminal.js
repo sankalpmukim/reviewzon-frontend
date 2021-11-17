@@ -12,7 +12,7 @@ export const InteractiveTerminal = ({ path }) => {
     for (let i = 0; i < textToDisplay.length; i++) {
       setTimeout(
         () => setLiveText((text) => text + textToDisplay[i]),
-        (i + 1) * 30
+        (i + 1) * 100
       );
     }
   }, [textToDisplay]);
@@ -48,11 +48,11 @@ export const InteractiveTerminal = ({ path }) => {
           <button className="bar__button">&#9472;</button>
           <button className="bar__button">&#9723;</button>
         </div>
-        <p id="bar__user">fobabs@ubuntu: ~</p>
+        <p id="bar__user">server@ubuntu: ~</p>
       </section>
       <section id="terminal__body">
         <div id="terminal__prompt">
-          <span id="terminal__prompt--user">fobabs@ubuntu:</span>
+          <span id="terminal__prompt--user">server@ubuntu:</span>
           <span id="terminal__prompt--location">~</span>
           <span id="terminal__prompt--bling">$</span>
           <div
@@ -74,7 +74,8 @@ export const InteractiveTerminal = ({ path }) => {
         {firebaseListPersisted.map((text, idx) => (
           <TerminalElement color={text.color} text={text.message} key={idx} />
         ))}
-        <span id="terminal__prompt--cursor" ref={endRef}></span>
+        <span id="terminal__prompt--cursor"></span>
+        <span ref={endRef}>&#8203;</span>
       </section>
     </div>
   );
