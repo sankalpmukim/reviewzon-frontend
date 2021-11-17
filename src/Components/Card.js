@@ -20,13 +20,12 @@ export const Card = ({
         }
         style={{ width: "18rem" }}
       >
-        <div
-          style={{
-            height: "10rem",
-            widows: "10rem",
-          }}
-        >
-          <img src={PlaceholderImage} className="card-img-top" alt="" />
+        <div className="card-image">
+          <img
+            src={PlaceholderImage}
+            className="card-img-top card-image"
+            alt=""
+          />
         </div>
 
         <div className="card-body">
