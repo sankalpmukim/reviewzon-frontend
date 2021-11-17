@@ -4,7 +4,8 @@ import { faChevronLeft } from "@fortawesome/fontawesome-free-solid";
 import { useEffect, useState } from "react";
 import "./CSS/ProgressDisplay.css";
 import { Loading } from "./Loading";
-import { TerminalBox } from "./TerminalBox";
+// import { TerminalBox } from "./TerminalBox";
+import { InteractiveTerminal } from "./InteractiveTerminal";
 
 export const ProgressDisplay = () => {
   const [searchParams] = useSearchParams();
@@ -63,7 +64,7 @@ export const ProgressDisplay = () => {
         </div>
       </div>
 
-      {path ? <TerminalBox path={path} /> : <Loading />}
+      {path ? <InteractiveTerminal path={path} /> : <Loading />}
     </div>
   );
 };

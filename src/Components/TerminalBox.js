@@ -11,6 +11,7 @@ export const TerminalBox = ({ path }) => {
     if (firebaseList.length > textToDisplay.length) {
       setTextToDisplay(firebaseList);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [firebaseList]);
   const endRef = useRef(null);
   useEffect(() => {
