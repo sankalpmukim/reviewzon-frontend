@@ -91,6 +91,7 @@ export const ChooseApproach = () => {
           gridTemplateColumns: "1fr 4fr 1fr",
           width: "97vw",
         }}
+        className="header-box"
       >
         <div
           style={{
@@ -105,9 +106,12 @@ export const ChooseApproach = () => {
               navigate("/");
             }}
             style={{
-              width: "100px",
-              height: "50px",
+              width: "5rem",
+              height: "2.5rem",
               fontSize: "150%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <FontAwesomeIcon icon={faChevronLeft} />
@@ -115,7 +119,9 @@ export const ChooseApproach = () => {
           </button>
         </div>
 
-        <h2 className="text-center">This is the ChooseApproach page</h2>
+        <h2 className="text-center main-heading">
+          This is the ChooseApproach page
+        </h2>
       </div>
       <div className="square-grid" onChange={handleChange}>
         <h4 className="text-center">Choose training set here</h4>

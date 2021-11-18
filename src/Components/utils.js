@@ -77,3 +77,11 @@ export const validURL = (url) => {
   }
   return false;
 };
+
+export const arrayContains = function (array, needle) {
+  for (var i in array) {
+    // Loop through every item in array
+    if (array[i] === needle) return true; // return true if current item == needle
+  }
+  return false;
+};

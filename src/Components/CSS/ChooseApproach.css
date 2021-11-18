@@ -1,10 +1,35 @@
 .square-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: 49% auto 49%;
   padding: 1rem;
   justify-content: center;
   align-items: center;
+  width: auto;
+  height: 90vh;
+}
+
+.card-body {
+  padding: 0.5rem;
+}
+
+.card-image {
+  height: 8rem;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-heading {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.header-box {
+  height: 6vh;
 }
 
 .buttons-next {
