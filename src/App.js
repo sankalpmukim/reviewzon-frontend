@@ -1,8 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router";
+import { Home } from "./Components/Home";
 import { ChooseApproach } from "./Components/ChooseApproach";
 import { ProgressDisplay } from "./Components/ProgressDisplay";
-import { Home } from "./Components/Home";
+import { OutputDisplay } from "./Components/OutputDisplay";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/chooseapproach" element={<ChooseApproach />} />
         <Route path="/progressdisplay" element={<ProgressDisplay />} />
+        <Route path="/output/:uniqueKey" element={<OutputDisplay />} />
       </Routes>
     </div>
   );

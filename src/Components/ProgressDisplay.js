@@ -1,28 +1,12 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/fontawesome-free-solid";
-import { useEffect, useState } from "react";
 import "./CSS/ProgressDisplay.css";
-import { Loading } from "./Loading";
 // import { TerminalBox } from "./TerminalBox";
 import { InteractiveTerminal } from "./InteractiveTerminal";
 
 export const ProgressDisplay = () => {
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [path, setPath] = useState(null);
-  useEffect(() => {
-    const url = `http://localhost:8000/`;
-    fetch(url, {
-      method: "POST",
-      body: searchParams.get("data"),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((res) => res.json())
-      .then((r) => setPath(`livedata/${r["unique_id"]}`));
-  }, [searchParams]);
 
   return (
     <div
@@ -63,8 +47,9 @@ export const ProgressDisplay = () => {
           <h2 className="text-center">This is progress display page</h2>
         </div>
       </div>
-
-      {path ? <InteractiveTerminal path={path} /> : <Loading />}
+      <div className="grid-container">
+        <InteractiveTerminal />
+      </div>
     </div>
   );
 };
