@@ -20,7 +20,10 @@ export const FirebaseTerminal = ({ path, setExitButton }) => {
   }, [firebaseListPersisted, setExitButton]);
 
   useEffect(() => {
-    setFirebaseListPersisted(firebaseList);
+    if (firebaseList.length > firebaseListPersisted.length) {
+      setFirebaseListPersisted(firebaseList);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [firebaseList]);
   return (
     <div>
