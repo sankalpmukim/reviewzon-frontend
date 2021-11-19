@@ -20,6 +20,8 @@ export const TerminalPrompt = ({ liveText, setLiveText, commands }) => {
         setLiveText((text) => text + command.substring(3).toLowerCase());
       } else if (command === "Space") {
         setLiveText((text) => text + " ");
+      } else if (command === "Quote") {
+        setLiveText((text) => text + "'");
       } else if (command === "Minus") {
         setLiveText((text) => text + "-");
       } else if (command.length === 6 && command.substring(0, 5) === "Digit") {
