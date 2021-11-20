@@ -33,6 +33,7 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
               component: StaticPrompt,
               props: {
                 oldText: commandText,
+                setPrompt: setPrompt,
               },
             },
             commands[commandText],
