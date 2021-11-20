@@ -1,15 +1,45 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { ErrorMessage } from "./Commands/ErrorMessage";
+import { StaticPrompt } from "./StaticPrompt";
 
-export const TerminalPrompt = ({ liveText, setLiveText, commands }) => {
+export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
+  const [liveText, setLiveText] = useState("");
   useEffect(() => {
     const onEnterPress = (commandText) => {
       if (typeof commands[commandText] === "undefined") {
-        alert(
-          `${commandText} is not recognized as an internal or external command.`
+        setContent((existingContent) =>
+          existingContent.concat([
+            {
+              component: StaticPrompt,
+              props: {
+                oldText: commandText,
+                setPrompt: setPrompt,
+              },
+            },
+            {
+              component: ErrorMessage,
+              props: {
+                setPrompt,
+                commandText,
+              },
+            },
+          ])
         );
       } else {
-        commands[commandText]();
+        // commands[commandText]();
+        setContent((existingContent) =>
+          existingContent.concat([
+            {
+              component: StaticPrompt,
+              props: {
+                oldText: commandText,
+              },
+            },
+            commands[commandText],
+          ])
+        );
       }
+      setLiveText("");
     };
     const registerKeyPresses = (e) => {
       const command = e.code;
@@ -39,7 +69,8 @@ export const TerminalPrompt = ({ liveText, setLiveText, commands }) => {
     return () => {
       document.removeEventListener("keyup", registerKeyPresses);
     };
-  }, [setLiveText, commands, liveText]);
+  }, [setLiveText, commands, liveText, setContent, setPrompt]);
+
   return (
     <div id="terminal__prompt">
       <span id="terminal__prompt--user">server@ubuntu:</span>

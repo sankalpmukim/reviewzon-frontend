@@ -3,7 +3,7 @@ import { useListVals } from "react-firebase-hooks/database";
 import { useState, useEffect, useRef } from "react";
 import { TerminalElement } from "./TerminalElement";
 
-export const FirebaseTerminal = ({ path, setExitButton }) => {
+export const FirebaseTerminal = ({ path, setPrompt }) => {
   const db = getDatabase();
   const [firebaseList] = useListVals(ref(db, path));
   const [firebaseListPersisted, setFirebaseListPersisted] = useState([]);
@@ -15,9 +15,9 @@ export const FirebaseTerminal = ({ path, setExitButton }) => {
         "undefined" &&
       firebaseListPersisted[firebaseListPersisted.length - 1].end === true
     ) {
-      setExitButton(true);
+      setPrompt(true);
     }
-  }, [firebaseListPersisted, setExitButton]);
+  }, [firebaseListPersisted, setPrompt]);
 
   useEffect(() => {
     if (firebaseList.length > firebaseListPersisted.length) {
