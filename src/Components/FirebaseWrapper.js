@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FirebaseTerminal } from "./FirebaseTerminal";
 
-export const FirebaseWrapper = ({ setPrompt }) => {
+export const FirebaseWrapper = ({ setPrompt, setUniqueKey }) => {
   const [path, setPath] = useState(null);
   const [searchParams] = useSearchParams();
   useEffect(() => {
@@ -15,7 +15,10 @@ export const FirebaseWrapper = ({ setPrompt }) => {
       },
     })
       .then((res) => res.json())
-      .then((r) => setPath(`livedata/${r["unique_id"]}`));
-  }, [searchParams]);
+      .then((r) => {
+        setPath(`livedata/${r["unique_id"]}`);
+        setUniqueKey(r["unique_id"]);
+      });
+  }, [searchParams, setUniqueKey]);
   return path ? <FirebaseTerminal path={path} setPrompt={setPrompt} /> : null;
 };

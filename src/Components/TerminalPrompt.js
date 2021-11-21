@@ -10,14 +10,14 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
         setContent((existingContent) =>
           existingContent.concat([
             {
-              component: StaticPrompt,
+              Component: StaticPrompt,
               props: {
                 oldText: commandText,
                 setPrompt: setPrompt,
               },
             },
             {
-              component: ErrorMessage,
+              Component: ErrorMessage,
               props: {
                 setPrompt,
                 commandText,
@@ -27,18 +27,22 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
         );
       } else {
         // commands[commandText]();
-        setContent((existingContent) =>
-          existingContent.concat([
-            {
-              component: StaticPrompt,
-              props: {
-                oldText: commandText,
-                setPrompt: setPrompt,
+        if (typeof commands[commandText].Component !== "undefined") {
+          setContent((existingContent) =>
+            existingContent.concat([
+              {
+                Component: StaticPrompt,
+                props: {
+                  oldText: commandText,
+                  setPrompt: setPrompt,
+                },
               },
-            },
-            commands[commandText],
-          ])
-        );
+              commands[commandText],
+            ])
+          );
+        } else {
+          commands[commandText]();
+        }
       }
       setLiveText("");
     };

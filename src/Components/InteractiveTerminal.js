@@ -5,10 +5,14 @@ import { Help } from "./Commands/help";
 import "./CSS/InteractiveTerminal.css";
 import { TerminalPrompt } from "./TerminalPrompt";
 import { FirebaseWrapper } from "./FirebaseWrapper";
+import { useNavigate } from "react-router-dom";
+import { TerminalElement } from "./TerminalElement";
 
 export const InteractiveTerminal = () => {
   const [content, setContent] = useState([]);
   const [prompt, setPrompt] = useState(false);
+  const [uniqueKey, setUniqueKey] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     endRef.current.scrollIntoView({ behavior: "smooth" });
@@ -31,7 +35,7 @@ export const InteractiveTerminal = () => {
       <section id="terminal__body" style={{ display: "inline-block" }}>
         <Help setPrompt={setPrompt} />
         {content.map((obj, idx) => (
-          <obj.component {...obj.props} key={idx} />
+          <obj.Component {...obj.props} key={idx} />
         ))}
         {prompt ? (
           <TerminalPrompt
@@ -39,17 +43,41 @@ export const InteractiveTerminal = () => {
             setPrompt={setPrompt}
             commands={{
               help: {
-                component: Help,
+                Component: Help,
                 props: {
                   setPrompt,
                 },
               },
               "execute-ml": {
-                component: FirebaseWrapper,
+                Component: FirebaseWrapper,
                 props: {
                   setPrompt,
+                  setUniqueKey,
                 },
               },
+              "launch-output":
+                uniqueKey === ""
+                  ? {
+                      Component: ({ setPrompt }) => {
+                        useEffect(() => {
+                          setPrompt(true);
+                        }, [setPrompt]);
+                        return (
+                          <TerminalElement
+                            text={`sentiment analysis not yet done. try typing \`execute-ml\` to go ahead.`}
+                            color={`#FF0000`}
+                          />
+                        );
+                      },
+                      props: {
+                        setPrompt,
+                      },
+                    }
+                  : () => {
+                      setTimeout(() => {
+                        navigate(`/output/${uniqueKey}`);
+                      }, 2000);
+                    },
             }}
           />
         ) : null}

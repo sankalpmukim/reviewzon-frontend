@@ -1,7 +1,6 @@
 import "./CSS/ProgressDisplay.css";
 export const TerminalElement = ({ text, color }) => {
   const countSymbols = (text) => {
-    console.log(`${text} in count symbols`);
     let count = 0;
     while (text[count] === ">") {
       count++;
