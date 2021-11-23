@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { ErrorMessage } from "./Commands/ErrorMessage";
+import { RequestDisplay } from "./RequestDisplay";
 import { StaticPrompt } from "./StaticPrompt";
 
 export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
   const [liveText, setLiveText] = useState("");
   useEffect(() => {
-    const onEnterPress = (commandText) => {
+    const onEnterPress = (totalText) => {
+      const commandText = totalText.split(" ")[0];
       if (typeof commands[commandText] === "undefined") {
         setContent((existingContent) =>
           existingContent.concat([
             {
               Component: StaticPrompt,
               props: {
-                oldText: commandText,
+                oldText: totalText,
                 setPrompt: setPrompt,
               },
             },
@@ -25,6 +27,22 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
             },
           ])
         );
+      } else if (commands[commandText].Component === RequestDisplay) {
+        setContent((existingContent) =>
+          existingContent.concat([
+            {
+              Component: StaticPrompt,
+              props: {
+                oldText: totalText,
+                setPrompt: setPrompt,
+              },
+            },
+            {
+              Component: commands[commandText].Component,
+              props: { ...commands[commandText].props, text: totalText },
+            },
+          ])
+        );
       } else {
         // commands[commandText]();
         if (typeof commands[commandText].Component !== "undefined") {
@@ -33,7 +51,7 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
               {
                 Component: StaticPrompt,
                 props: {
-                  oldText: commandText,
+                  oldText: totalText,
                   setPrompt: setPrompt,
                 },
               },

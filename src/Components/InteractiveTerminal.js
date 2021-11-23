@@ -7,6 +7,7 @@ import { TerminalPrompt } from "./TerminalPrompt";
 import { FirebaseWrapper } from "./FirebaseWrapper";
 import { useNavigate } from "react-router-dom";
 import { TerminalElement } from "./TerminalElement";
+import { RequestDisplay } from "./RequestDisplay";
 
 export const InteractiveTerminal = () => {
   const [content, setContent] = useState([]);
@@ -77,6 +78,30 @@ export const InteractiveTerminal = () => {
                       setTimeout(() => {
                         navigate(`/output/${uniqueKey}`);
                       }, 2000);
+                    },
+              "check-sentiment":
+                uniqueKey === ""
+                  ? {
+                      Component: ({ setPrompt }) => {
+                        useEffect(() => {
+                          setPrompt(true);
+                        }, [setPrompt]);
+                        return (
+                          <TerminalElement
+                            text={`sentiment analysis not yet done. try typing \`execute-ml\` to go ahead.`}
+                            color={`#FF0000`}
+                          />
+                        );
+                      },
+                      props: {
+                        setPrompt,
+                      },
+                    }
+                  : {
+                      Component: RequestDisplay,
+                      props: {
+                        setPrompt,
+                      },
                     },
             }}
           />
