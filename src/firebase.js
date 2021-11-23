@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getRemoteConfig } from "firebase/remote-config";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,3 +21,23 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
+
+const remoteConfig = getRemoteConfig();
+remoteConfig.settings.minimumFetchIntervalMillis = 3600000;
+const defaultObj = {
+  backend_url: "http://localhost:8000",
+  cloud_commands: [
+    {
+      name: "placeholder0",
+      description: "this will be displayed in help for placeholder0",
+      target: "/placeholder/0",
+      meta: {
+        description: "meta is useful for providing info for planned cases",
+        useFirebase: true,
+        firebase: { rtdb_path: "testing/dynamic" },
+      },
+    },
+  ],
+};
+
+remoteConfig.defaultConfig = defaultObj;
