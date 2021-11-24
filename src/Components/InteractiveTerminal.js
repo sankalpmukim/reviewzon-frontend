@@ -13,11 +13,13 @@ export const InteractiveTerminal = () => {
   const [content, setContent] = useState([]);
   const [prompt, setPrompt] = useState(false);
   const [uniqueKey, setUniqueKey] = useState("");
+  const [history, setHistory] = useState([]);
+  const [current, setCurrent] = useState(-1);
   const navigate = useNavigate();
 
   useEffect(() => {
     endRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [content]);
+  }, [content, prompt]);
 
   const endRef = useRef(null);
 
@@ -40,6 +42,10 @@ export const InteractiveTerminal = () => {
         ))}
         {prompt ? (
           <TerminalPrompt
+            current={current}
+            setCurrent={setCurrent}
+            history={history}
+            setHistory={setHistory}
             setContent={setContent}
             setPrompt={setPrompt}
             commands={{
@@ -101,6 +107,7 @@ export const InteractiveTerminal = () => {
                       Component: RequestDisplay,
                       props: {
                         setPrompt,
+                        uniqueKey,
                       },
                     },
             }}

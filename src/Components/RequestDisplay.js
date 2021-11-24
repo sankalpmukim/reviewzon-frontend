@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   fetchAndActivate,
@@ -6,8 +7,10 @@ import {
 } from "@firebase/remote-config";
 import { TerminalElement } from "./TerminalElement";
 
-export const RequestDisplay = ({ setPrompt, text }) => {
+export const RequestDisplay = ({ setPrompt, text, uniqueKey }) => {
   const [res, setRes] = useState(null);
+  const [searchParams] = useSearchParams();
+
   useEffect(() => {
     const configEvent = async () => {
       const remoteConfig = getRemoteConfig();
@@ -20,16 +23,25 @@ export const RequestDisplay = ({ setPrompt, text }) => {
       console.log(`sent text ${text}`);
       const response = await fetch(`${url}/placeholder`, {
         method: "POST",
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({
+          text: text,
+          uniqueKey: uniqueKey,
+          data: JSON.parse(searchParams.get("data")),
+        }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       }).then((resp) => resp.json());
       setRes(response);
-      setPrompt(true);
     };
     configEvent();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (res !== null) {
+      setPrompt(true);
+    }
+  }, [res, setPrompt]);
   return res !== null ? (
     <TerminalElement text={res.message} color={res.color} />
   ) : null;
