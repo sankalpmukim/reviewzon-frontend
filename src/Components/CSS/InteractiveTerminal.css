@@ -18,8 +18,8 @@
 
 #terminal__body::-webkit-scrollbar-thumb {
   background-color: rgb(87, 46, 91);
-  /* outline: 1px solid slategray; */
-  /* color: #3c3b37; */
+  outline: 1px solid slategray;
+  color: #3c3b37;
   width: 0.5em;
   border: 5px solid transparent;
   border-radius: 6.25rem;
