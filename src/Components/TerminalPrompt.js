@@ -82,6 +82,11 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
           setLiveText((text) => text + "'");
         } else if (command === "Minus") {
           setLiveText((text) => text + "-");
+        } else if (command === "Tab") {
+          e.preventDefault();
+          setLiveText((text) => text + "    ");
+        } else if (command === "Comma") {
+          setLiveText((text) => text + ",");
         } else if (
           command.length === 6 &&
           command.substring(0, 5) === "Digit"
@@ -108,10 +113,10 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
         });
       }
     };
-    document.addEventListener("keyup", registerKeyPresses);
+    document.addEventListener("keydown", registerKeyPresses);
 
     return () => {
-      document.removeEventListener("keyup", registerKeyPresses);
+      document.removeEventListener("keydown", registerKeyPresses);
     };
   }, [setLiveText, commands, liveText, setContent, setPrompt]);
 
@@ -128,10 +133,15 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
           paddingLeft: "1rem",
         }}
       >
-        <span style={{ color: "greenyellow" }}>
+        <pre
+          style={{
+            color: "greenyellow",
+            margin: "0",
+          }}
+        >
           {` `}
           {liveText}
-        </span>
+        </pre>
         <span id="terminal__prompt--cursor"></span>
       </div>
     </div>
