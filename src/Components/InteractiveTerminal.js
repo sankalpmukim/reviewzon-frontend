@@ -16,6 +16,79 @@ export const InteractiveTerminal = () => {
   const [history, setHistory] = useState([]);
   const [current, setCurrent] = useState(-1);
   const navigate = useNavigate();
+  const systemCommands = {
+    "execute-ml": {
+      Component: FirebaseWrapper,
+      props: {
+        setPrompt,
+        setUniqueKey,
+      },
+      isFunction: false,
+      description: "Executes ml analysis on provided dataset rules.",
+    },
+    "launch-output":
+      uniqueKey === ""
+        ? {
+            Component: ({ setPrompt }) => {
+              useEffect(() => {
+                setPrompt(true);
+              }, [setPrompt]);
+              return (
+                <TerminalElement
+                  text={`sentiment analysis not yet done. try typing \`execute-ml\` to go ahead.`}
+                  color={`#FF0000`}
+                />
+              );
+            },
+            props: {
+              setPrompt,
+            },
+            isFunction: false,
+            description:
+              "Launch output page which contains analysis and graphs on the result of training and experiments(requires `execute-ml` first)",
+          }
+        : {
+            isFunction: true,
+            function: () => {
+              setTimeout(() => {
+                navigate(`/output/${uniqueKey}`);
+              }, 2000);
+            },
+            description:
+              "Launch output page which contains analysis and graphs on the result of training and experiments(requires `execute-ml` first)",
+          },
+    "check-sentiment":
+      uniqueKey === ""
+        ? {
+            Component: ({ setPrompt }) => {
+              useEffect(() => {
+                setPrompt(true);
+              }, [setPrompt]);
+              return (
+                <TerminalElement
+                  text={`sentiment analysis not yet done. try typing \`execute-ml\` to go ahead.`}
+                  color={`#FF0000`}
+                />
+              );
+            },
+            props: {
+              setPrompt,
+            },
+            isFunction: false,
+            description:
+              "Check live sentiment on trained model(requires `execute-ml` first).",
+          }
+        : {
+            Component: RequestDisplay,
+            props: {
+              setPrompt,
+              uniqueKey,
+            },
+            isFunction: false,
+            description:
+              "Check live sentiment on trained model(requires `execute-ml` first).",
+          },
+  };
 
   useEffect(() => {
     endRef.current.scrollIntoView({ behavior: "smooth" });
@@ -49,67 +122,14 @@ export const InteractiveTerminal = () => {
             setContent={setContent}
             setPrompt={setPrompt}
             commands={{
+              ...systemCommands,
               help: {
                 Component: Help,
                 props: {
                   setPrompt,
+                  systemCommands,
                 },
               },
-              "execute-ml": {
-                Component: FirebaseWrapper,
-                props: {
-                  setPrompt,
-                  setUniqueKey,
-                },
-              },
-              "launch-output":
-                uniqueKey === ""
-                  ? {
-                      Component: ({ setPrompt }) => {
-                        useEffect(() => {
-                          setPrompt(true);
-                        }, [setPrompt]);
-                        return (
-                          <TerminalElement
-                            text={`sentiment analysis not yet done. try typing \`execute-ml\` to go ahead.`}
-                            color={`#FF0000`}
-                          />
-                        );
-                      },
-                      props: {
-                        setPrompt,
-                      },
-                    }
-                  : () => {
-                      setTimeout(() => {
-                        navigate(`/output/${uniqueKey}`);
-                      }, 2000);
-                    },
-              "check-sentiment":
-                uniqueKey === ""
-                  ? {
-                      Component: ({ setPrompt }) => {
-                        useEffect(() => {
-                          setPrompt(true);
-                        }, [setPrompt]);
-                        return (
-                          <TerminalElement
-                            text={`sentiment analysis not yet done. try typing \`execute-ml\` to go ahead.`}
-                            color={`#FF0000`}
-                          />
-                        );
-                      },
-                      props: {
-                        setPrompt,
-                      },
-                    }
-                  : {
-                      Component: RequestDisplay,
-                      props: {
-                        setPrompt,
-                        uniqueKey,
-                      },
-                    },
             }}
           />
         ) : null}

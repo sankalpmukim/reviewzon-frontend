@@ -17,10 +17,10 @@ export const StaticPrompt = ({ oldText, setPrompt }) => {
           paddingLeft: "1rem",
         }}
       >
-        <span style={{ color: "greenyellow" }}>
+        <pre style={{ color: "greenyellow", margin: "0" }}>
           {` `}
           {oldText}
-        </span>
+        </pre>
       </div>
     </div>
   );

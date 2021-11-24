@@ -98,6 +98,7 @@
 
 #terminal__prompt {
   display: flex;
+  align-items: center;
 }
 #terminal__prompt--user {
   color: #7eda28;
