@@ -59,7 +59,7 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
             ])
           );
         } else {
-          commands[commandText]();
+          commands[commandText].function();
         }
       }
       setLiveText("");
