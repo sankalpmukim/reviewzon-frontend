@@ -1,32 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { OutputPageNavigation } from "./OutputPageNavigation";
-import { TerminalElement } from "./TerminalElement";
+import { Help } from "./Commands/help";
+// import { OutputPageNavigation } from "./OutputPageNavigation";
+// import { TerminalElement } from "./TerminalElement";
 import "./CSS/InteractiveTerminal.css";
 import { TerminalPrompt } from "./TerminalPrompt";
-import { useSearchParams } from "react-router-dom";
-import { FirebaseTerminal } from "./FirebaseTerminal";
+import { FirebaseWrapper } from "./FirebaseWrapper";
+import { useNavigate } from "react-router-dom";
+import { TerminalElement } from "./TerminalElement";
+import { RequestDisplay } from "./RequestDisplay";
 
 export const InteractiveTerminal = () => {
-  const [exitButton, setExitButton] = useState(false);
-  const [searchParams] = useSearchParams();
-  const [path, setPath] = useState(null);
-  const [enable, setEnable] = useState(false);
+  const [content, setContent] = useState([]);
+  const [prompt, setPrompt] = useState(false);
+  const [uniqueKey, setUniqueKey] = useState("");
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (enable === true) {
-      const url = `http://localhost:8000/`;
-      fetch(url, {
-        method: "POST",
-        body: searchParams.get("data"),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      })
-        .then((res) => res.json())
-        .then((r) => setPath(`livedata/${r["unique_id"]}`));
-    }
-  }, [searchParams, enable]);
-  // const [userInput, setUserInput] = useState("");
-  const [liveText, setLiveText] = useState("");
+    endRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [content]);
 
   const endRef = useRef(null);
 
@@ -43,36 +34,78 @@ export const InteractiveTerminal = () => {
         <p id="bar__user">server@ubuntu: ~</p>
       </section>
       <section id="terminal__body" style={{ display: "inline-block" }}>
-        {!enable ? (
-          <>
-            <div
-              style={{
-                color: "rgb(87, 252, 20)",
-              }}
-            >
-              Type execute and press enter to proceed...
-            </div>
-            <TerminalPrompt
-              liveText={liveText}
-              setLiveText={setLiveText}
-              commands={{
-                execute: () => {
-                  setEnable(true);
-                  setLiveText("");
+        <Help setPrompt={setPrompt} />
+        {content.map((obj, idx) => (
+          <obj.Component {...obj.props} key={idx} />
+        ))}
+        {prompt ? (
+          <TerminalPrompt
+            setContent={setContent}
+            setPrompt={setPrompt}
+            commands={{
+              help: {
+                Component: Help,
+                props: {
+                  setPrompt,
                 },
-              }}
-            />
-          </>
+              },
+              "execute-ml": {
+                Component: FirebaseWrapper,
+                props: {
+                  setPrompt,
+                  setUniqueKey,
+                },
+              },
+              "launch-output":
+                uniqueKey === ""
+                  ? {
+                      Component: ({ setPrompt }) => {
+                        useEffect(() => {
+                          setPrompt(true);
+                        }, [setPrompt]);
+                        return (
+                          <TerminalElement
+                            text={`sentiment analysis not yet done. try typing \`execute-ml\` to go ahead.`}
+                            color={`#FF0000`}
+                          />
+                        );
+                      },
+                      props: {
+                        setPrompt,
+                      },
+                    }
+                  : () => {
+                      setTimeout(() => {
+                        navigate(`/output/${uniqueKey}`);
+                      }, 2000);
+                    },
+              "check-sentiment":
+                uniqueKey === ""
+                  ? {
+                      Component: ({ setPrompt }) => {
+                        useEffect(() => {
+                          setPrompt(true);
+                        }, [setPrompt]);
+                        return (
+                          <TerminalElement
+                            text={`sentiment analysis not yet done. try typing \`execute-ml\` to go ahead.`}
+                            color={`#FF0000`}
+                          />
+                        );
+                      },
+                      props: {
+                        setPrompt,
+                      },
+                    }
+                  : {
+                      Component: RequestDisplay,
+                      props: {
+                        setPrompt,
+                      },
+                    },
+            }}
+          />
         ) : null}
-        <TerminalElement color={"green"} text={""} />
-        {path ? (
-          <FirebaseTerminal setExitButton={setExitButton} path={path} />
-        ) : null}
-
-        {exitButton ? (
-          <OutputPageNavigation uniqueKey={path.split("/")[1]} />
-        ) : null}
-
         <span ref={endRef}>&#8203;</span>
       </section>
     </div>
