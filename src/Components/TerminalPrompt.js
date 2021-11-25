@@ -7,8 +7,7 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
   const [liveText, setLiveText] = useState("");
   useEffect(() => {
     const onEnterPress = (totalText) => {
-      const commandText = totalText.split(" ")[0];
-      if (typeof commands[commandText] === "undefined") {
+      const AddErrorMessage = (commandText) => {
         setContent((existingContent) =>
           existingContent.concat([
             {
@@ -27,6 +26,10 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
             },
           ])
         );
+      };
+      const commandText = totalText.split(" ")[0];
+      if (typeof commands[commandText] === "undefined") {
+        AddErrorMessage(commandText);
       } else if (commands[commandText].Component === RequestDisplay) {
         setContent((existingContent) =>
           existingContent.concat([
@@ -45,19 +48,76 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
         );
       } else {
         // commands[commandText]();
-        if (typeof commands[commandText].Component !== "undefined") {
-          setContent((existingContent) =>
-            existingContent.concat([
-              {
-                Component: StaticPrompt,
-                props: {
-                  oldText: totalText,
-                  setPrompt: setPrompt,
+        if (commands[commandText].isFunction === false) {
+          if (commandText === "execute-ml") {
+            let doExperiment;
+            const oneDashIdx = totalText.split(" ")[1].indexOf("-");
+            const twoDashIdx = totalText.split(" ")[1].indexOf("--");
+            if (
+              (oneDashIdx === 0 &&
+                totalText
+                  .split(" ")[1]
+                  .substring(oneDashIdx + 1, oneDashIdx + 2) === "e") ||
+              (twoDashIdx === 0 &&
+                totalText
+                  .split(" ")[1]
+                  .substring(
+                    twoDashIdx + 2,
+                    twoDashIdx + 2 + "experiment".length
+                  ) === "experiment")
+            ) {
+              doExperiment = true;
+            } else {
+              if (
+                oneDashIdx === 0 ||
+                twoDashIdx === 0 ||
+                (commandText === "execute-ml" &&
+                  totalText.length > commandText.length)
+              ) {
+                AddErrorMessage(totalText);
+              } else {
+                doExperiment = false;
+                console.log(`oneDashIndex: ${oneDashIdx}`);
+                console.log(`twoDashIndex: ${twoDashIdx}`);
+                console.log(
+                  totalText.substring(oneDashIdx + 1, oneDashIdx + 2)
+                );
+              }
+            }
+            if (doExperiment === true || doExperiment === false) {
+              setContent((existingContent) =>
+                existingContent.concat([
+                  {
+                    Component: StaticPrompt,
+                    props: {
+                      oldText: totalText,
+                      setPrompt: setPrompt,
+                    },
+                  },
+                  {
+                    ...commands[commandText],
+                    props: {
+                      ...commands[commandText].props,
+                      doExperiment,
+                    },
+                  },
+                ])
+              );
+            }
+          } else {
+            setContent((existingContent) =>
+              existingContent.concat([
+                {
+                  Component: StaticPrompt,
+                  props: {
+                    oldText: totalText,
+                    setPrompt: setPrompt,
+                  },
                 },
-              },
-              commands[commandText],
-            ])
-          );
+                commands[commandText],
+              ])
+            );
+          }
         } else {
           commands[commandText].function();
         }

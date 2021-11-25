@@ -83,6 +83,7 @@ export const InteractiveTerminal = () => {
             props: {
               setPrompt,
               uniqueKey,
+              endPoint: "checksentiment",
             },
             isFunction: false,
             description:

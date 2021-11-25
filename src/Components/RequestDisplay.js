@@ -7,7 +7,7 @@ import {
 } from "@firebase/remote-config";
 import { TerminalElement } from "./TerminalElement";
 
-export const RequestDisplay = ({ setPrompt, text, uniqueKey }) => {
+export const RequestDisplay = ({ setPrompt, text, uniqueKey, endPoint }) => {
   const [res, setRes] = useState(null);
   const [searchParams] = useSearchParams();
 
@@ -21,7 +21,7 @@ export const RequestDisplay = ({ setPrompt, text, uniqueKey }) => {
       console.log(val);
       const url = JSON.parse(val._value)["backend_url"];
       console.log(`sent text ${text}`);
-      const response = await fetch(`${url}/placeholder`, {
+      const response = await fetch(`${url}/${endPoint}`, {
         method: "POST",
         body: JSON.stringify({
           text: text,
