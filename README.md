@@ -34,12 +34,13 @@ We have used the following in our project:
 We are using cross validation to choose the best model and hyper parameters.
 We will validate each classifier and it's hyper parameters using Recall, Precision, Specificity, Accuracy, and most importantly AUC-ROC curves.
 
+### Architecture of the project
+![image](https://github.com/z404/reviewzon-backend/blob/0c3eeef20847aa8e34ad570411c2a85ae730a76e/assets/architecture.png)
+
 ## Frontend
-### Flow
-Flow
 
 ### Setup codebase
-Note: To fully experience all the features, you need to setup the backend as well that is hound here.\
+Note: To fully experience all the features, you need to setup the backend as well that is found [here](https://github.com/z404/reviewzon-backend).
 
 First clone the frontend, using:\
 `git clone https://github.com/sankalpmukim/reviewzon-frontend.git`\
