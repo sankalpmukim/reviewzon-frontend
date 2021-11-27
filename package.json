@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^5.1.3",
     "firebase": "^9.4.1",
+    "gh-pages": "^3.2.3",
     "history": "^5.1.0",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
@@ -35,6 +36,8 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -60,5 +63,6 @@
   },
   "devDependencies": {
     "@types/jquery": "^3.5.8"
-  }
+  },
+  "homepage": "https://sankalpmukim.github.io/reviewzon-frontend"
 }

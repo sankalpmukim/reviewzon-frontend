@@ -97,6 +97,7 @@
 }
 
 #terminal__prompt {
+  padding-left: 0.625rem;
   display: flex;
   align-items: center;
 }

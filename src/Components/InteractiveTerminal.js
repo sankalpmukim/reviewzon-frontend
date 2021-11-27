@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Help } from "./Commands/help";
 // import { OutputPageNavigation } from "./OutputPageNavigation";
-// import { TerminalElement } from "./TerminalElement";
 import "./CSS/InteractiveTerminal.css";
 import { TerminalPrompt } from "./TerminalPrompt";
 import { FirebaseWrapper } from "./FirebaseWrapper";
@@ -45,7 +44,7 @@ export const InteractiveTerminal = () => {
             },
             isFunction: false,
             description:
-              "Launch output page which contains analysis and graphs on the result of training and experiments(requires `execute-ml` first)",
+              "Launch output page which contains analysis and graphs on the result of training and experiments (requires `execute-ml` first)",
           }
         : {
             isFunction: true,
@@ -55,7 +54,7 @@ export const InteractiveTerminal = () => {
               }, 2000);
             },
             description:
-              "Launch output page which contains analysis and graphs on the result of training and experiments(requires `execute-ml` first)",
+              "Launch output page which contains analysis and graphs on the result of training and experiments (requires `execute-ml` first)",
           },
     "check-sentiment":
       uniqueKey === ""
@@ -76,17 +75,18 @@ export const InteractiveTerminal = () => {
             },
             isFunction: false,
             description:
-              "Check live sentiment on trained model(requires `execute-ml` first).",
+              "Check live sentiment on trained model (requires `execute-ml` first).",
           }
         : {
             Component: RequestDisplay,
             props: {
               setPrompt,
               uniqueKey,
+              endPoint: "checksentiment",
             },
             isFunction: false,
             description:
-              "Check live sentiment on trained model(requires `execute-ml` first).",
+              "Check live sentiment on trained model (requires `execute-ml` first).",
           },
   };
 
@@ -129,6 +129,7 @@ export const InteractiveTerminal = () => {
                   setPrompt,
                   systemCommands,
                 },
+                isFunction: false,
               },
             }}
           />
