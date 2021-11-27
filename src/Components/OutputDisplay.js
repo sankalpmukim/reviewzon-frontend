@@ -84,7 +84,7 @@ export const OutputDisplay = () => {
           </button>
         </div>
         <div className="output-header-content">
-          <h2 className="text-center">{`this is the output display page and this is the unique key: ${uniqueKey}`}</h2>
+          <h2 className="text-center">{`Results and Conclusion`}</h2>
         </div>
       </div>
       <div className="output-content">

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/fontawesome-free-solid";
 import { ReactComponent as PlaceholderImage } from "../static/Placeholder.svg";
 import { useNavigate } from "react-router-dom";
-import Logo from "../logo192.png";
+import Logo from "../static/logo192.png";
 import "./CSS/Home.css";
 
 export const Home = () => {

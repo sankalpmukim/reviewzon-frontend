@@ -7,29 +7,52 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
   const [liveText, setLiveText] = useState("");
   useEffect(() => {
     const onEnterPress = (totalText) => {
-      const AddErrorMessage = (commandText) => {
-        setContent((existingContent) =>
-          existingContent.concat([
-            {
-              Component: StaticPrompt,
-              props: {
-                oldText: totalText,
-                setPrompt: setPrompt,
+      const AddErrorMessage = (commandText, entireText) => {
+        if (entireText) {
+          setContent((existingContent) =>
+            existingContent.concat([
+              {
+                Component: StaticPrompt,
+                props: {
+                  oldText: totalText,
+                  setPrompt: setPrompt,
+                },
               },
-            },
-            {
-              Component: ErrorMessage,
-              props: {
-                setPrompt,
-                commandText,
+              {
+                Component: ErrorMessage,
+                props: {
+                  setPrompt,
+                  commandText,
+                  entireText,
+                },
               },
-            },
-          ])
-        );
+            ])
+          );
+        } else {
+          setContent((existingContent) =>
+            existingContent.concat([
+              {
+                Component: StaticPrompt,
+                props: {
+                  oldText: totalText,
+                  setPrompt: setPrompt,
+                },
+              },
+              {
+                Component: ErrorMessage,
+                props: {
+                  setPrompt,
+                  commandText,
+                  entireText,
+                },
+              },
+            ])
+          );
+        }
       };
       const commandText = totalText.split(" ")[0];
       if (typeof commands[commandText] === "undefined") {
-        AddErrorMessage(commandText);
+        AddErrorMessage(commandText, false);
       } else if (commands[commandText].Component === RequestDisplay) {
         setContent((existingContent) =>
           existingContent.concat([
@@ -51,59 +74,71 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
         if (commands[commandText].isFunction === false) {
           if (commandText === "execute-ml") {
             let doExperiment;
-            const oneDashIdx = totalText.split(" ")[1].indexOf("-");
-            const twoDashIdx = totalText.split(" ")[1].indexOf("--");
-            if (
-              (oneDashIdx === 0 &&
-                totalText
-                  .split(" ")[1]
-                  .substring(oneDashIdx + 1, oneDashIdx + 2) === "e") ||
-              (twoDashIdx === 0 &&
-                totalText
-                  .split(" ")[1]
-                  .substring(
-                    twoDashIdx + 2,
-                    twoDashIdx + 2 + "experiment".length
-                  ) === "experiment")
-            ) {
-              doExperiment = true;
-            } else {
+            try {
+              const oneDashIdx = totalText.split(" ")[1].indexOf("-");
+              const twoDashIdx = totalText.split(" ")[1].indexOf("--");
               if (
-                oneDashIdx === 0 ||
-                twoDashIdx === 0 ||
-                (commandText === "execute-ml" &&
-                  totalText.length > commandText.length)
+                (oneDashIdx === 0 &&
+                  totalText
+                    .split(" ")[1]
+                    .substring(oneDashIdx + 1, oneDashIdx + 2) === "e") ||
+                (twoDashIdx === 0 &&
+                  totalText
+                    .split(" ")[1]
+                    .substring(
+                      twoDashIdx + 2,
+                      twoDashIdx + 2 + "experiment".length
+                    ) === "experiment")
               ) {
-                AddErrorMessage(totalText);
+                doExperiment = true;
               } else {
-                doExperiment = false;
-                console.log(`oneDashIndex: ${oneDashIdx}`);
-                console.log(`twoDashIndex: ${twoDashIdx}`);
-                console.log(
-                  totalText.substring(oneDashIdx + 1, oneDashIdx + 2)
-                );
+                totalText = totalText.trim();
+                if (
+                  oneDashIdx === 0 ||
+                  twoDashIdx === 0 ||
+                  (commandText === "execute-ml" &&
+                    totalText.length > commandText.length)
+                ) {
+                  if (totalText.split(" ")[1].trim() === "") {
+                    AddErrorMessage(`Please don't use extra spaces.`, true);
+                  } else {
+                    AddErrorMessage(
+                      `${
+                        totalText.split(" ")[1]
+                      } is not recognised as an appropriate flag to execute-ml command`,
+                      true
+                    );
+                  }
+                } else {
+                  doExperiment = false;
+                  console.log(`oneDashIndex: ${oneDashIdx}`);
+                  console.log(`twoDashIndex: ${twoDashIdx}`);
+                  console.log(
+                    totalText.substring(oneDashIdx + 1, oneDashIdx + 2)
+                  );
+                }
               }
+            } catch {
+              doExperiment = false;
             }
-            if (doExperiment === true || doExperiment === false) {
-              setContent((existingContent) =>
-                existingContent.concat([
-                  {
-                    Component: StaticPrompt,
-                    props: {
-                      oldText: totalText,
-                      setPrompt: setPrompt,
-                    },
+            setContent((existingContent) =>
+              existingContent.concat([
+                {
+                  Component: StaticPrompt,
+                  props: {
+                    oldText: totalText,
+                    setPrompt: setPrompt,
                   },
-                  {
-                    ...commands[commandText],
-                    props: {
-                      ...commands[commandText].props,
-                      doExperiment,
-                    },
+                },
+                {
+                  ...commands[commandText],
+                  props: {
+                    ...commands[commandText].props,
+                    doExperiment,
                   },
-                ])
-              );
-            }
+                },
+              ])
+            );
           } else {
             setContent((existingContent) =>
               existingContent.concat([
@@ -144,7 +179,7 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
           setLiveText((text) => text + "-");
         } else if (command === "Tab") {
           e.preventDefault();
-          setLiveText((text) => text + "    ");
+          setLiveText((text) => text + "\t");
         } else if (command === "Comma") {
           setLiveText((text) => text + ",");
         } else if (

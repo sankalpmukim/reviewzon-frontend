@@ -5,10 +5,12 @@ import {
 } from "@firebase/remote-config";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { ErrorMessage } from "./Commands/ErrorMessage";
 import { FirebaseTerminal } from "./FirebaseTerminal";
 
 export const FirebaseWrapper = ({ setPrompt, setUniqueKey, doExperiment }) => {
   const [path, setPath] = useState(null);
+  const [showErr, setShowErr] = useState(false);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
@@ -36,9 +38,25 @@ export const FirebaseWrapper = ({ setPrompt, setUniqueKey, doExperiment }) => {
           setPath(`livedata/${r["unique_id"]}`);
           setUniqueKey(r["unique_id"]);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setShowErr(true);
+        });
     };
     configEvent();
-  }, [doExperiment, searchParams, setUniqueKey]);
-  return path ? <FirebaseTerminal path={path} setPrompt={setPrompt} /> : null;
+  }, [doExperiment, searchParams, setUniqueKey, setPrompt]);
+  return (
+    <>
+      {showErr ? (
+        <>
+          <ErrorMessage
+            commandText="Backend not online right now."
+            entireText={true}
+            setPrompt={setPrompt}
+          />
+        </>
+      ) : null}
+      {path ? <FirebaseTerminal path={path} setPrompt={setPrompt} /> : null}
+    </>
+  );
 };

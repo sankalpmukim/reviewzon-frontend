@@ -44,7 +44,7 @@ export const ProgressDisplay = () => {
           </button>
         </div>
         <div>
-          <h2 className="text-center">This is progress display page</h2>
+          <h2 className="text-center">ReviewZon terminal</h2>
         </div>
       </div>
       <div className="grid-container">

@@ -120,7 +120,7 @@ export const ChooseApproach = () => {
         </div>
 
         <h2 className="text-center main-heading">
-          This is the ChooseApproach page
+          Choose analysis methodology
         </h2>
       </div>
       <div className="square-grid" onChange={handleChange}>
