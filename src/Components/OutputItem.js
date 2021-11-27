@@ -1,3 +1,4 @@
+import { TerminalElement } from "./TerminalElement";
 import "./CSS/OutputDisplay.css";
 
 export const OutputItem = ({ imgSrc, title, bodyText, unique }) =>
@@ -44,7 +45,11 @@ export const OutputItem = ({ imgSrc, title, bodyText, unique }) =>
         data-bs-parent="#accordionParent"
       >
         <div className="accordion-body">
-          <div className="output-text">{bodyText}</div>
+          <div className="output-text">
+            {bodyText.split("\n").map((line) => (
+              <TerminalElement color="#000000" text={line} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
