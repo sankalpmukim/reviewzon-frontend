@@ -42,7 +42,7 @@ Flow
 Note: To fully experience all the features, you need to setup the backend as well that is hound here.\
 
 First clone the frontend, using:\
-`git clone https://github.com/sankalpmukim/reviewzon-frontend.git`
+`git clone https://github.com/sankalpmukim/reviewzon-frontend.git`\
 Move into project directory:\
 `cd reviewzon-frontend`\
 Install all dependencies:\
