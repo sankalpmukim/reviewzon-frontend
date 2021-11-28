@@ -15,13 +15,13 @@ export const Card = ({
   setCogClicked,
 }) => {
   const id = name + "-" + mode;
-  var imagesource = PlaceholderImage;
+  let CardImage = PlaceholderImage;
   if (id === "test-set-automatic") {
-    imagesource = LocalTestImage;
+    CardImage = LocalTestImage;
   } else if (id === "training-set-automatic") {
-    imagesource = LocalTrainImage;
+    CardImage = LocalTrainImage;
   } else {
-    imagesource = OnlineImage;
+    CardImage = OnlineImage;
   }
   return (
     <div className="card-parent">
@@ -33,7 +33,7 @@ export const Card = ({
       >
         <div className="card-image">
           <img
-            src={imagesource}
+            src={CardImage}
             className="card-img-top card-image"
             alt=""
             style={{ paddingLeft: "5px", paddingTop: "5px" }}

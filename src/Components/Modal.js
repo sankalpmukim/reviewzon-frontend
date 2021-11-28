@@ -22,7 +22,7 @@ export const Modal = ({ extra_text, title, id, saveChanges, children }) => {
             ></button>
           </div>
           <div className="modal-body">
-            <h5 style={{ paddingBottom: "30px" }}>{extra_text}</h5>
+            <h5 style={{ paddingBottom: "1.875rem" }}>{extra_text}</h5>
             {children}
           </div>
           <div className="modal-footer">

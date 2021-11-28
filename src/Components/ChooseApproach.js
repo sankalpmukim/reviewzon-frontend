@@ -52,11 +52,11 @@ export const ChooseApproach = () => {
     text: "Create dataset by downloading reviews from Amazon",
     title: "Online Dataset",
   };
-  const _default = {
+  const localTop = {
     text: "Use a local dataset (Automotive Reviews - 20,473 entries)",
     title: "Local Dataset",
   };
-  const _default2 = {
+  const localBottom = {
     text: "Use a local dataset (Musical Instrument Reviews - 250 entries)",
     title: "Local Dataset",
   };
@@ -131,8 +131,8 @@ export const ChooseApproach = () => {
         <h4 className="text-center">Choose training set</h4>
         <Card
           classes={classData}
-          text={_default.text}
-          title={_default.title}
+          text={localTop.text}
+          title={localTop.title}
           name="training-set"
           mode="automatic"
           settingsDisabled={true}
@@ -169,8 +169,8 @@ export const ChooseApproach = () => {
         <h4 className="text-center">Choose test set</h4>
         <Card
           classes={classData}
-          text={_default2.text}
-          title={_default2.title}
+          text={localBottom.text}
+          title={localBottom.title}
           name="test-set"
           mode="automatic"
           settingsDisabled={true}
