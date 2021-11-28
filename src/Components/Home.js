@@ -16,14 +16,14 @@ export const Home = () => {
           justifyContent: "space-around",
         }}
       >
-        <h1>Welcome to Reviewzon demo!</h1>
+        <h1>Welcome to Reviewzon!</h1>
         <img src={Logo} alt="App logo" />
       </div>
       <div className="container px-4">
         <div className="row p-10">
           <div className="col-8">
             {
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+              "Sentiment Analysis is an up and coming field of research in the realm of data mining. It's applications are limitless, and it opens up so many new possibilities! In our project, ReviewZon, we've utilized the strength of Natural Language Processing and Machine Learning to create an application that can evaluate a review of a product and accurately predict the sentiment of the review. It has a highly customizable setup, and the user can decide the train set and test set as they please."
             }
           </div>
           <div className="col-4 text-center">
@@ -40,7 +40,7 @@ export const Home = () => {
           </div>
           <div className="col-8">
             {
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+              "ReviewZon gives the opportunity to practice everything about an ML project and makes it simpler. You can supply amazon product links to create datasets that can be used for train or test sets! Don't want to search for so many products? You can always choose the offline dataset instead! You can then watch the logs in real time while the ML Model trains, and once completed, you get an interactive command prompt experience to evaluate the generated model and visualize its outputs. Click the green button below to get started!"
             }
           </div>
         </div>

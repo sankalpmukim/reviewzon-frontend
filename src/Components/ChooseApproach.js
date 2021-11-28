@@ -49,12 +49,16 @@ export const ChooseApproach = () => {
   const [formLink, setFormLink] = useState("");
   const navigate = useNavigate();
   const manual = {
-    text: "Add Amazon products links in configuration view",
-    title: "Manual",
+    text: "Create dataset by downloading reviews from Amazon",
+    title: "Online Dataset",
   };
   const _default = {
-    text: "Use existing pre trained models. Saves time.",
-    title: "Default",
+    text: "Use a local dataset (Automotive Reviews - 20,473 entries)",
+    title: "Local Dataset",
+  };
+  const _default2 = {
+    text: "Use a local dataset (Musical Instrument Reviews - 250 entries)",
+    title: "Local Dataset",
   };
   const handleChange = (e) => {
     const data = e.target.id;
@@ -119,12 +123,12 @@ export const ChooseApproach = () => {
           </button>
         </div>
 
-        <h2 className="text-center main-heading">
-          Choose analysis methodology
+        <h2 className="text-center main-heading" style={{ fontSize: "35px" }}>
+          Choose Analysis Methodology
         </h2>
       </div>
       <div className="square-grid" onChange={handleChange}>
-        <h4 className="text-center">Choose training set here</h4>
+        <h4 className="text-center">Choose training set</h4>
         <Card
           classes={classData}
           text={_default.text}
@@ -162,11 +166,11 @@ export const ChooseApproach = () => {
             gridColumnEnd: -1,
           }}
         />
-        <h4 className="text-center">Choose test set here</h4>
+        <h4 className="text-center">Choose test set</h4>
         <Card
           classes={classData}
-          text={_default.text}
-          title={_default.title}
+          text={_default2.text}
+          title={_default2.title}
           name="test-set"
           mode="automatic"
           settingsDisabled={true}
@@ -181,7 +185,11 @@ export const ChooseApproach = () => {
           setCogClicked={() => setLastClickedTraining(false)}
         />
       </div>
-      <Modal id="configModal" title="Select training configurations">
+      <Modal
+        id="configModal"
+        title="Select training configurations"
+        extra_text="Paste your amazon link here and hit the plus button to add it to the dataset!"
+      >
         <div>
           <div className=" ">
             <form
