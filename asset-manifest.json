@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/reviewzon-frontend/static/css/main.1978ea84.chunk.css",
-    "main.js": "/reviewzon-frontend/static/js/main.8e51eb75.chunk.js",
-    "main.js.map": "/reviewzon-frontend/static/js/main.8e51eb75.chunk.js.map",
+    "main.js": "/reviewzon-frontend/static/js/main.9f5830ef.chunk.js",
+    "main.js.map": "/reviewzon-frontend/static/js/main.9f5830ef.chunk.js.map",
     "runtime-main.js": "/reviewzon-frontend/static/js/runtime-main.420c5d6c.js",
     "runtime-main.js.map": "/reviewzon-frontend/static/js/runtime-main.420c5d6c.js.map",
     "static/css/2.383c0125.chunk.css": "/reviewzon-frontend/static/css/2.383c0125.chunk.css",
@@ -14,13 +14,16 @@
     "static/css/2.383c0125.chunk.css.map": "/reviewzon-frontend/static/css/2.383c0125.chunk.css.map",
     "static/css/main.1978ea84.chunk.css.map": "/reviewzon-frontend/static/css/main.1978ea84.chunk.css.map",
     "static/js/2.0fe08feb.chunk.js.LICENSE.txt": "/reviewzon-frontend/static/js/2.0fe08feb.chunk.js.LICENSE.txt",
-    "static/media/Placeholder.b45163e9.svg": "/reviewzon-frontend/static/media/Placeholder.b45163e9.svg"
+    "static/media/Placeholder.b45163e9.svg": "/reviewzon-frontend/static/media/Placeholder.b45163e9.svg",
+    "static/media/local_test.749d1a5d.png": "/reviewzon-frontend/static/media/local_test.749d1a5d.png",
+    "static/media/local_train.0056b63f.png": "/reviewzon-frontend/static/media/local_train.0056b63f.png",
+    "static/media/online.fb71506f.png": "/reviewzon-frontend/static/media/online.fb71506f.png"
   },
   "entrypoints": [
     "static/js/runtime-main.420c5d6c.js",
     "static/css/2.383c0125.chunk.css",
     "static/js/2.0fe08feb.chunk.js",
     "static/css/main.1978ea84.chunk.css",
-    "static/js/main.8e51eb75.chunk.js"
+    "static/js/main.9f5830ef.chunk.js"
   ]
 }
