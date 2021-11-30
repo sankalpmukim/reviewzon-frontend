@@ -225,7 +225,6 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          paddingLeft: "1rem",
         }}
       >
         <pre

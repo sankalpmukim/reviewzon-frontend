@@ -1,4 +1,7 @@
 import PlaceholderImage from "../static/Placeholder.svg";
+import LocalTestImage from "../static/local_test.png";
+import OnlineImage from "../static/online.png";
+import LocalTrainImage from "../static/local_train.png";
 import "./CSS/Card.css";
 import { SettingsCog } from "./SettingsCog";
 
@@ -12,6 +15,14 @@ export const Card = ({
   setCogClicked,
 }) => {
   const id = name + "-" + mode;
+  let CardImage = PlaceholderImage;
+  if (id === "test-set-automatic") {
+    CardImage = LocalTestImage;
+  } else if (id === "training-set-automatic") {
+    CardImage = LocalTrainImage;
+  } else {
+    CardImage = OnlineImage;
+  }
   return (
     <div className="card-parent">
       <div
@@ -22,9 +33,10 @@ export const Card = ({
       >
         <div className="card-image">
           <img
-            src={PlaceholderImage}
+            src={CardImage}
             className="card-img-top card-image"
             alt=""
+            style={{ paddingLeft: "5px", paddingTop: "5px" }}
           />
         </div>
 

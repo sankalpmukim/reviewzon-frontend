@@ -14,7 +14,6 @@ export const StaticPrompt = ({ oldText, setPrompt }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          paddingLeft: "1rem",
         }}
       >
         <pre style={{ color: "greenyellow", margin: "0" }}>
