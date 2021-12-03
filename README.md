@@ -2,6 +2,8 @@
 # ReviewZon
 ReviewZon is a ML based tool that helps users make smart decisions by analyzing amazon reviews of a product. 
 
+Visit [here](https://sankalpmukim.github.io/reviewzon-frontend)
+
 ## Objective
 Our project’s aim is to classify reviews of a product into positive and negative sentiment groups. When using ReviewZon, the user can choose their test and train sets. For both, the test set and the train set, the user can decide if they want to use a local (pre downloaded) dataset, or a set of amazon product links from which a dataset of reviews can be built. Using the chosen datasets, a model is trained, validated, and tested. Both the flows are described below in detail.
 
