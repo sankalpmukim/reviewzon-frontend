@@ -2,10 +2,11 @@ export const handlePageChange = (
   classData,
   trainingLinks,
   testingLinks,
-  navigate
+  navigate,
+  isDisabled
 ) => {
   let sendData = {};
-  // {"train": {"mode":1, "urls":[]}, "test": {"mode":2, "urls": ["","",""]}}
+  // {"train": {"mode":1, "urls":[]}, "test": {"mode":2, "urls": ["","",""]}, "backendOnline":true}
   // for training:
   if (classData.training === "" && classData.test === "") {
     alert("Please choose options from below!");
@@ -61,6 +62,12 @@ export const handlePageChange = (
       },
     };
   }
+
+  sendData = {
+    ...sendData,
+    backendOnline: !isDisabled,
+  };
+
   const url = new URL(`http://127.0.0.1/progressdisplay`);
   url.searchParams.append(`data`, JSON.stringify(sendData));
   navigate(url.pathname + url.search);

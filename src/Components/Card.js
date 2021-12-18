@@ -13,6 +13,7 @@ export const Card = ({
   settingsDisabled,
   classes,
   setCogClicked,
+  isDisabled,
 }) => {
   const id = name + "-" + mode;
   let CardImage = PlaceholderImage;
@@ -24,7 +25,7 @@ export const Card = ({
     CardImage = OnlineImage;
   }
   return (
-    <div className="card-parent">
+    <div className={`card-parent${isDisabled ? " card-disabled" : ""}`}>
       <div
         className={
           "card" + (classes[name.split("-")[0]] === mode ? " selected" : "")
@@ -49,17 +50,24 @@ export const Card = ({
             id={id}
             autoComplete="off"
             name={name}
+            disabled={isDisabled}
           />
           <div style={{ display: "flex", justifyContent: "space-evenly" }}>
             <label
-              className="btn btn-outline-primary"
+              className={`btn btn-${
+                isDisabled ? `secondary disabled` : `outline-primary`
+              }`}
               htmlFor={id}
               style={{ width: "70%" }}
             >
               Select
             </label>
             {settingsDisabled ? null : (
-              <SettingsCog data={id} onClick={setCogClicked} />
+              <SettingsCog
+                data={id}
+                onClick={setCogClicked}
+                isDisabled={isDisabled}
+              />
             )}
           </div>
         </div>

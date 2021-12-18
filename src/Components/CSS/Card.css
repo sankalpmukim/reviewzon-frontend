@@ -10,6 +10,14 @@
   height: min-content;
 }
 
+.card-disabled {
+  color: gray;
+}
+
+.card-disabled > img {
+  opacity: 0.2;
+}
+
 /* .settings-cog {
   color: #6c757d;
   background-color: white;

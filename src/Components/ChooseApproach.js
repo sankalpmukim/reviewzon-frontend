@@ -1,12 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  fetchAndActivate,
+  getRemoteConfig,
+  getValue,
+} from "@firebase/remote-config";
+import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/fontawesome-free-solid";
 import { Card } from "./Card";
 import "./CSS/ChooseApproach.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Modal } from "./Modal";
 import { PlusCircle } from "react-bootstrap-icons";
 import { UrlDisplay } from "./UrlDisplay";
@@ -42,6 +47,26 @@ export const ChooseApproach = () => {
     training: "",
     test: "",
   });
+  const [isDisabled, setIsDisabled] = useState(true);
+  useEffect(() => {
+    const configEvent = async () => {
+      const remoteConfig = getRemoteConfig();
+      const change = await fetchAndActivate(remoteConfig);
+
+      console.log(`activated ${change}`);
+      const val = getValue(remoteConfig, "reviewzon_online");
+      console.log(val);
+      const url = JSON.parse(val._value)["backend_url"];
+      await fetch(`${url}/online`)
+        .then((_res) => setIsDisabled(false))
+        .catch((err) => {
+          setIsDisabled(true);
+          // console.error(err);
+          console.log("this got triggered");
+        });
+    };
+    configEvent();
+  }, []);
 
   const [trainingLinks, setTrainingLinks] = useState([]);
   const [testingLinks, setTestingLinks] = useState([]);
@@ -136,6 +161,7 @@ export const ChooseApproach = () => {
           name="training-set"
           mode="automatic"
           settingsDisabled={true}
+          isDisabled={false}
         />
         <Card
           classes={classData}
@@ -147,13 +173,20 @@ export const ChooseApproach = () => {
           setCogClicked={() => {
             setLastClickedTraining(true);
           }}
+          isDisabled={isDisabled}
         />
         <div className="buttons-next">
           <button
             className="btn btn-success"
             style={{ width: "100px", height: "50px", fontSize: "150%" }}
             onClick={() =>
-              handlePageChange(classData, trainingLinks, testingLinks, navigate)
+              handlePageChange(
+                classData,
+                trainingLinks,
+                testingLinks,
+                navigate,
+                isDisabled
+              )
             }
           >
             <FontAwesomeIcon icon={faChevronRight} />
@@ -174,6 +207,7 @@ export const ChooseApproach = () => {
           name="test-set"
           mode="automatic"
           settingsDisabled={true}
+          isDisabled={false}
         />
         <Card
           classes={classData}
@@ -183,6 +217,7 @@ export const ChooseApproach = () => {
           mode="manual"
           settingsDisabled={false}
           setCogClicked={() => setLastClickedTraining(false)}
+          isDisabled={isDisabled}
         />
       </div>
       <Modal
