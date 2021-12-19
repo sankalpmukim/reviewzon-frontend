@@ -10,8 +10,10 @@ import { FirebaseTerminal } from "./FirebaseTerminal";
 
 export const FirebaseWrapper = ({ setPrompt, setUniqueKey, doExperiment }) => {
   const [path, setPath] = useState(null);
-  const [showErr, setShowErr] = useState(false);
   const [searchParams] = useSearchParams();
+  const [showErr, setShowErr] = useState(
+    JSON.parse(searchParams.get("data")).backendOnline === false
+  );
 
   useEffect(() => {
     const sendData = {
@@ -48,8 +50,11 @@ export const FirebaseWrapper = ({ setPrompt, setUniqueKey, doExperiment }) => {
   }, [doExperiment, searchParams, setUniqueKey, setPrompt]);
   return (
     <>
-      {showErr ? <LocalTerminal setPrompt={setPrompt} /> : null}
-      {path ? <FirebaseTerminal path={path} setPrompt={setPrompt} /> : null}
+      {showErr ? (
+        <LocalTerminal setPrompt={setPrompt} />
+      ) : (
+        <FirebaseTerminal path={path} setPrompt={setPrompt} />
+      )}
     </>
   );
 };

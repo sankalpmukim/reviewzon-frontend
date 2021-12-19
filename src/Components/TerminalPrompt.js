@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ErrorMessage } from "./Commands/ErrorMessage";
+import { OnlineSentimentAnalysis } from "./OnlineSentimentAnalysis";
 import { RequestDisplay } from "./RequestDisplay";
 import { StaticPrompt } from "./StaticPrompt";
 
@@ -53,7 +54,10 @@ export const TerminalPrompt = ({ setPrompt, commands, setContent }) => {
       const commandText = totalText.split(" ")[0];
       if (typeof commands[commandText] === "undefined") {
         AddErrorMessage(commandText, false);
-      } else if (commands[commandText].Component === RequestDisplay) {
+      } else if (
+        commands[commandText].Component === RequestDisplay ||
+        commands[commandText].Component === OnlineSentimentAnalysis
+      ) {
         setContent((existingContent) =>
           existingContent.concat([
             {
