@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/reviewzon-frontend/static/css/main.e4129282.chunk.css",
-    "main.js": "/reviewzon-frontend/static/js/main.3d016220.chunk.js",
-    "main.js.map": "/reviewzon-frontend/static/js/main.3d016220.chunk.js.map",
+    "main.js": "/reviewzon-frontend/static/js/main.ae23c0bb.chunk.js",
+    "main.js.map": "/reviewzon-frontend/static/js/main.ae23c0bb.chunk.js.map",
     "runtime-main.js": "/reviewzon-frontend/static/js/runtime-main.29b7c42a.js",
     "runtime-main.js.map": "/reviewzon-frontend/static/js/runtime-main.29b7c42a.js.map",
     "static/css/2.0a9ec390.chunk.css": "/reviewzon-frontend/static/css/2.0a9ec390.chunk.css",
@@ -24,6 +24,6 @@
     "static/css/2.0a9ec390.chunk.css",
     "static/js/2.e5e7219f.chunk.js",
     "static/css/main.e4129282.chunk.css",
-    "static/js/main.3d016220.chunk.js"
+    "static/js/main.ae23c0bb.chunk.js"
   ]
 }
