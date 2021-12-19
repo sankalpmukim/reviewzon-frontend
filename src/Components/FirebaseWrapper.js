@@ -50,11 +50,8 @@ export const FirebaseWrapper = ({ setPrompt, setUniqueKey, doExperiment }) => {
   }, [doExperiment, searchParams, setUniqueKey, setPrompt]);
   return (
     <>
-      {showErr ? (
-        <LocalTerminal setPrompt={setPrompt} />
-      ) : (
-        <FirebaseTerminal path={path} setPrompt={setPrompt} />
-      )}
+      {showErr ? <LocalTerminal setPrompt={setPrompt} /> : null}
+      {path ? <FirebaseTerminal path={path} setPrompt={setPrompt} /> : null}
     </>
   );
 };
