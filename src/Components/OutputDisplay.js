@@ -6,7 +6,13 @@ import { OutputItem } from "./OutputItem";
 import { getDatabase, ref as dbRef, get } from "firebase/database";
 
 export const OutputDisplay = () => {
+  let mainKey;
   const { uniqueKey } = useParams();
+  if (uniqueKey === "0") {
+    mainKey = "65983233";
+  } else {
+    mainKey = uniqueKey;
+  }
   const [output, setOutput] = useState([]);
   const [staticInfo, setStaticInfo] = useState(null);
   const [allOutputData, setAllOutputData] = useState(null);
@@ -14,20 +20,20 @@ export const OutputDisplay = () => {
 
   useEffect(() => {
     const db = getDatabase();
-    const allOutputRef = dbRef(db, `output/${uniqueKey}`);
+    const allOutputRef = dbRef(db, `output/${mainKey}`);
     get(allOutputRef)
       .then((snapshot) => {
         if (snapshot.exists()) {
           console.log(snapshot.val());
           setAllOutputData(snapshot.val());
         } else {
-          console.log(`No data available for this key: ${uniqueKey}`);
+          console.log(`No data available for this key: ${mainKey}`);
         }
       })
       .catch((error) => {
         console.error(error);
       });
-  }, [uniqueKey]);
+  }, [mainKey]);
 
   useEffect(() => {
     if (allOutputData === null) return;

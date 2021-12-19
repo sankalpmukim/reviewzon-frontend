@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { Help } from "./Commands/help";
 // import { OutputPageNavigation } from "./OutputPageNavigation";
 import "./CSS/InteractiveTerminal.css";
+import { useSearchParams } from "react-router-dom";
 import { TerminalPrompt } from "./TerminalPrompt";
 import { FirebaseWrapper } from "./FirebaseWrapper";
 import { useNavigate } from "react-router-dom";
 import { TerminalElement } from "./TerminalElement";
 import { RequestDisplay } from "./RequestDisplay";
+import { OnlineSentimentAnalysis } from "./OnlineSentimentAnalysis";
 
 export const InteractiveTerminal = () => {
   const [content, setContent] = useState([]);
@@ -14,6 +16,10 @@ export const InteractiveTerminal = () => {
   const [uniqueKey, setUniqueKey] = useState("");
   const [history, setHistory] = useState([]);
   const [current, setCurrent] = useState(-1);
+  const [searchParams] = useSearchParams();
+  const [backendOnline] = useState(
+    JSON.parse(searchParams.get("data"))["backendOnline"]
+  );
   const navigate = useNavigate();
   const systemCommands = {
     "execute-ml": {
@@ -77,12 +83,23 @@ export const InteractiveTerminal = () => {
             description:
               "Check live sentiment on trained model (requires `execute-ml` first).",
           }
-        : {
+        : backendOnline
+        ? {
             Component: RequestDisplay,
             props: {
               setPrompt,
               uniqueKey,
               endPoint: "checksentiment",
+            },
+            isFunction: false,
+            description:
+              "Check live sentiment on trained model (requires `execute-ml` first).",
+          }
+        : {
+            Component: OnlineSentimentAnalysis,
+            props: {
+              backendOnline,
+              setPrompt,
             },
             isFunction: false,
             description:

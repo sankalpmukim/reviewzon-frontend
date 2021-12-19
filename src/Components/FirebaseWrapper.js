@@ -5,13 +5,15 @@ import {
 } from "@firebase/remote-config";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ErrorMessage } from "./Commands/ErrorMessage";
+import { LocalTerminal } from "./LocalTerminal";
 import { FirebaseTerminal } from "./FirebaseTerminal";
 
 export const FirebaseWrapper = ({ setPrompt, setUniqueKey, doExperiment }) => {
   const [path, setPath] = useState(null);
-  const [showErr, setShowErr] = useState(false);
   const [searchParams] = useSearchParams();
+  const [showErr, setShowErr] = useState(
+    JSON.parse(searchParams.get("data")).backendOnline === false
+  );
 
   useEffect(() => {
     const sendData = {
@@ -41,6 +43,7 @@ export const FirebaseWrapper = ({ setPrompt, setUniqueKey, doExperiment }) => {
         .catch((err) => {
           console.log(err);
           setShowErr(true);
+          setUniqueKey("0");
         });
     };
     configEvent();
@@ -48,15 +51,10 @@ export const FirebaseWrapper = ({ setPrompt, setUniqueKey, doExperiment }) => {
   return (
     <>
       {showErr ? (
-        <>
-          <ErrorMessage
-            commandText="Backend not online right now."
-            entireText={true}
-            setPrompt={setPrompt}
-          />
-        </>
-      ) : null}
-      {path ? <FirebaseTerminal path={path} setPrompt={setPrompt} /> : null}
+        <LocalTerminal setPrompt={setPrompt} />
+      ) : (
+        <FirebaseTerminal path={path} setPrompt={setPrompt} />
+      )}
     </>
   );
 };
