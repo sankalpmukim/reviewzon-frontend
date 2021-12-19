@@ -14,7 +14,7 @@ export const OnlineSentimentAnalysis = ({ setPrompt, text }) => {
             },
           }),
           headers: {
-            Authorization: `Basic ${`IsR9IFeYoalKlen2g_DkFC0sLog6xqU-f61VFNoHAU28`}`,
+            Authorization: `Basic ${process.env.REACT_APP_IBM_API_KEY}`,
             "Content-Type": "application/json",
           },
           method: "POST",
