@@ -14,8 +14,13 @@ There is 3 key aspects to our project:
  - Experiments on the model
 
 ### Training the model
-After preprocessing the data, ...
+Once the experimentation is complete, the model, hyperparameters and data are all ready.
+Now, we proceed to the step of training the final model. Using the entire dataset as the
+train set, and using Logistic regression, we now obtain the final model.
 
+This model is then applied to a test set, and its results are shown to the user. The model is
+then saved locally so it can be accessed later. Using the interactive command prompt on
+the frontend, the user can then test the sentiment of inputs that they feel like testing.
 
 ### Visualization
 Visual representation of data is a major part of data science and data mining. 
