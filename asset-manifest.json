@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/reviewzon-frontend/static/css/main.e4129282.chunk.css",
-    "main.js": "/reviewzon-frontend/static/js/main.ae23c0bb.chunk.js",
-    "main.js.map": "/reviewzon-frontend/static/js/main.ae23c0bb.chunk.js.map",
+    "main.js": "/reviewzon-frontend/static/js/main.17723bbd.chunk.js",
+    "main.js.map": "/reviewzon-frontend/static/js/main.17723bbd.chunk.js.map",
     "runtime-main.js": "/reviewzon-frontend/static/js/runtime-main.29b7c42a.js",
     "runtime-main.js.map": "/reviewzon-frontend/static/js/runtime-main.29b7c42a.js.map",
     "static/css/2.0a9ec390.chunk.css": "/reviewzon-frontend/static/css/2.0a9ec390.chunk.css",
-    "static/js/2.e5e7219f.chunk.js": "/reviewzon-frontend/static/js/2.e5e7219f.chunk.js",
-    "static/js/2.e5e7219f.chunk.js.map": "/reviewzon-frontend/static/js/2.e5e7219f.chunk.js.map",
+    "static/js/2.e41d7cf5.chunk.js": "/reviewzon-frontend/static/js/2.e41d7cf5.chunk.js",
+    "static/js/2.e41d7cf5.chunk.js.map": "/reviewzon-frontend/static/js/2.e41d7cf5.chunk.js.map",
     "index.html": "/reviewzon-frontend/index.html",
     "service-worker.js": "/reviewzon-frontend/service-worker.js",
     "service-worker.js.map": "/reviewzon-frontend/service-worker.js.map",
     "static/css/2.0a9ec390.chunk.css.map": "/reviewzon-frontend/static/css/2.0a9ec390.chunk.css.map",
     "static/css/main.e4129282.chunk.css.map": "/reviewzon-frontend/static/css/main.e4129282.chunk.css.map",
-    "static/js/2.e5e7219f.chunk.js.LICENSE.txt": "/reviewzon-frontend/static/js/2.e5e7219f.chunk.js.LICENSE.txt",
+    "static/js/2.e41d7cf5.chunk.js.LICENSE.txt": "/reviewzon-frontend/static/js/2.e41d7cf5.chunk.js.LICENSE.txt",
     "static/media/Placeholder.b45163e9.svg": "/reviewzon-frontend/static/media/Placeholder.b45163e9.svg",
     "static/media/local_test.749d1a5d.png": "/reviewzon-frontend/static/media/local_test.749d1a5d.png",
     "static/media/local_train.0056b63f.png": "/reviewzon-frontend/static/media/local_train.0056b63f.png",
@@ -22,8 +22,8 @@
   "entrypoints": [
     "static/js/runtime-main.29b7c42a.js",
     "static/css/2.0a9ec390.chunk.css",
-    "static/js/2.e5e7219f.chunk.js",
+    "static/js/2.e41d7cf5.chunk.js",
     "static/css/main.e4129282.chunk.css",
-    "static/js/main.ae23c0bb.chunk.js"
+    "static/js/main.17723bbd.chunk.js"
   ]
 }
